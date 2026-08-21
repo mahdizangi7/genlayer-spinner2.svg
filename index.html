@@ -57,7 +57,6 @@
       line-height: 1.55;
     }
 
-    /* ========== SPINNER ========== */
     .gl-spinner {
       --size: 48px;
       width: var(--size);
@@ -86,8 +85,8 @@
       animation: spinRight 1.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
     }
     .diamond {
-      transform-origin: 48.88px 45.965px;
-      animation: diamondPulse 1.8s ease-in-out infinite;
+      transform-origin: 48.64px 43.78px;
+      animation: diamondUp 1.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
       filter: drop-shadow(0 0 3px rgba(17, 15, 255, 0.5));
     }
 
@@ -105,9 +104,12 @@
       82%  { transform: rotate(-360deg) scale(1); }
       100% { transform: rotate(-360deg) scale(1); }
     }
-    @keyframes diamondPulse {
-      0%, 100% { transform: scale(1); opacity: 1; }
-      50%      { transform: scale(1.1); opacity: 0.92; }
+    @keyframes diamondUp {
+      0%   { transform: translateY(0) scale(1); }
+      18%  { transform: translateY(0) scale(1); }
+      50%  { transform: translateY(-22px) scale(1.08); }
+      82%  { transform: translateY(0) scale(1); }
+      100% { transform: translateY(0) scale(1); }
     }
   </style>
 </head>
@@ -194,8 +196,7 @@
   </div>
 
   <footer>
-    Pure SVG + CSS · Infinite loop · Light & dark ready · Readable at 24px<br>
-    Built with the official GenLayer mark · Kinetic Cobalt glow
+    Pure SVG + CSS · Infinite loop · Diamond moves upward · Light & dark ready
   </footer>
 </body>
 </html>
