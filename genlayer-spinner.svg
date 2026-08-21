@@ -1,76 +1,47 @@
-<svg
-  width="64"
-  height="64"
-  viewBox="0 0 64 64"
-  fill="none"
-  xmlns="http://www.w3.org/2000/svg"
-  style="overflow: visible;"
->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 97.76 91.93" width="48" height="48" role="img" aria-label="Loading">
   <style>
-    .system {
-      transform-origin: 32px 32px;
-      transform-box: view-box;
-      animation: systemSpin 3.5s linear infinite;
+    .wing-left {
+      transform-origin: 48.88px 45.965px;
+      animation: spinLeft 1.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
     }
-
-    .left-wing {
-      transform-origin: 32px 32px;
-      transform-box: view-box;
-      animation: leftSeparate 3.5s cubic-bezier(.4, 0, .2, 1) infinite;
+    .wing-right {
+      transform-origin: 48.88px 45.965px;
+      animation: spinRight 1.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
     }
-
-    .right-wing {
-      transform-origin: 32px 32px;
-      transform-box: view-box;
-      animation: rightSeparate 3.5s cubic-bezier(.4, 0, .2, 1) infinite;
+    .diamond {
+      transform-origin: 48.88px 45.965px;
+      animation: diamondPulse 1.8s ease-in-out infinite;
+      filter: drop-shadow(0 0 3px rgba(17, 15, 255, 0.5));
     }
-
-    .core {
-      transform-origin: 32px 41px;
-      transform-box: view-box;
-      animation: coreSpin 3.5s linear infinite;
+    @keyframes spinLeft {
+      0%   { transform: rotate(0deg) scale(1); }
+      18%  { transform: rotate(0deg) scale(1); }
+      50%  { transform: rotate(180deg) scale(0.78); }
+      82%  { transform: rotate(360deg) scale(1); }
+      100% { transform: rotate(360deg) scale(1); }
     }
-
-    @keyframes systemSpin {
-      0%, 25% { transform: rotate(0deg); }
-      55% { transform: rotate(360deg); }
-      100% { transform: rotate(360deg); }
+    @keyframes spinRight {
+      0%   { transform: rotate(0deg) scale(1); }
+      18%  { transform: rotate(0deg) scale(1); }
+      50%  { transform: rotate(-180deg) scale(0.78); }
+      82%  { transform: rotate(-360deg) scale(1); }
+      100% { transform: rotate(-360deg) scale(1); }
     }
-
-    @keyframes leftSeparate {
-      0%, 12% { transform: translate(0, 0) rotate(0deg); }
-      25%, 55% { transform: translate(-10px, -1px) rotate(-8deg); }
-      70%, 100% { transform: translate(0, 0) rotate(0deg); }
-    }
-
-    @keyframes rightSeparate {
-      0%, 12% { transform: translate(0, 0) rotate(0deg); }
-      25%, 55% { transform: translate(10px, -1px) rotate(8deg); }
-      70%, 100% { transform: translate(0, 0) rotate(0deg); }
-    }
-
-    @keyframes coreSpin {
-      0%, 25% { transform: rotate(0deg); }
-      55% { transform: rotate(-360deg); }
-      100% { transform: rotate(-360deg); }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .system, .left-wing, .right-wing, .core {
-        animation: none;
-      }
+    @keyframes diamondPulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50%      { transform: scale(1.1); opacity: 0.92; }
     }
   </style>
-
-  <g class="system">
-    <g class="left-wing">
-      <path d="M32 7 L32 28 L25 41 L9 49 L32 7 Z" fill="currentColor"/>
-    </g>
-    <g class="right-wing">
-      <path d="M32 7 L55 49 L39 41 L32 28 L32 7 Z" fill="currentColor"/>
-    </g>
-    <g class="core">
-      <path d="M32 33 L38 43 L32 48 L26 43 L32 33 Z" fill="currentColor"/>
-    </g>
+  <!-- GenLayer Mark – Left wing -->
+  <g class="wing-left">
+    <polygon fill="currentColor" points="44.26 32.35 27.72 67.12 43.29 74.9 0 91.93 44.26 0 44.26 32.35"/>
+  </g>
+  <!-- GenLayer Mark – Right wing -->
+  <g class="wing-right">
+    <polygon fill="currentColor" points="53.5 32.35 70.04 67.12 54.47 74.9 97.76 91.93 53.5 0 53.5 32.35"/>
+  </g>
+  <!-- GenLayer Mark – Central diamond (fixed) -->
+  <g class="diamond">
+    <polygon fill="currentColor" points="48.64 43.78 58.33 62.94 48.64 67.69 39.47 62.92 48.64 43.78"/>
   </g>
 </svg>
