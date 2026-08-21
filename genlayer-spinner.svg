@@ -9,8 +9,8 @@
       animation: spinRight 1.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
     }
     .diamond {
-      transform-origin: 48.88px 45.965px;
-      animation: diamondPulse 1.8s ease-in-out infinite;
+      transform-origin: 48.64px 43.78px;
+      animation: diamondUp 1.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
       filter: drop-shadow(0 0 3px rgba(17, 15, 255, 0.5));
     }
     @keyframes spinLeft {
@@ -27,20 +27,20 @@
       82%  { transform: rotate(-360deg) scale(1); }
       100% { transform: rotate(-360deg) scale(1); }
     }
-    @keyframes diamondPulse {
-      0%, 100% { transform: scale(1); opacity: 1; }
-      50%      { transform: scale(1.1); opacity: 0.92; }
+    @keyframes diamondUp {
+      0%   { transform: translateY(0) scale(1); }
+      18%  { transform: translateY(0) scale(1); }
+      50%  { transform: translateY(-22px) scale(1.08); }
+      82%  { transform: translateY(0) scale(1); }
+      100% { transform: translateY(0) scale(1); }
     }
   </style>
-  <!-- GenLayer Mark – Left wing -->
   <g class="wing-left">
     <polygon fill="currentColor" points="44.26 32.35 27.72 67.12 43.29 74.9 0 91.93 44.26 0 44.26 32.35"/>
   </g>
-  <!-- GenLayer Mark – Right wing -->
   <g class="wing-right">
     <polygon fill="currentColor" points="53.5 32.35 70.04 67.12 54.47 74.9 97.76 91.93 53.5 0 53.5 32.35"/>
   </g>
-  <!-- GenLayer Mark – Central diamond (fixed) -->
   <g class="diamond">
     <polygon fill="currentColor" points="48.64 43.78 58.33 62.94 48.64 67.69 39.47 62.92 48.64 43.78"/>
   </g>
