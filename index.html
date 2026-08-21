@@ -1,135 +1,201 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GenLayer Spinner</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GenLayer Loading Spinner</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      font-family: system-ui, -apple-system, sans-serif;
-      background: #0f172a;
-      color: #e2e8f0;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 3rem;
-      padding: 2rem;
+      gap: 48px;
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #070707;
+      color: #F5F5F5;
+      padding: 40px 20px;
     }
-
     h1 {
-      font-size: 1.75rem;
-      font-weight: 600;
+      font-weight: 500;
+      font-size: 15px;
+      letter-spacing: 0.12em;
+      color: #CACACA;
+      text-transform: uppercase;
     }
-
-    .demo-grid {
+    .row {
       display: flex;
-      gap: 3rem;
       flex-wrap: wrap;
+      gap: 48px 64px;
+      align-items: center;
       justify-content: center;
     }
-
-    .demo-box {
+    .item {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 1rem;
+      gap: 14px;
+    }
+    .label {
+      font-size: 12px;
+      color: #606060;
+      letter-spacing: 0.04em;
+    }
+    .light-panel {
+      background: #F5F5F5;
+      padding: 36px 48px;
+      border-radius: 12px;
+    }
+    .light-panel .label { color: #606060; }
+    footer {
+      max-width: 480px;
+      text-align: center;
+      font-size: 13px;
+      color: #606060;
+      line-height: 1.55;
     }
 
-    .demo-box p {
-      font-size: 0.9rem;
-      opacity: 0.7;
+    /* ========== SPINNER ========== */
+    .gl-spinner {
+      --size: 48px;
+      width: var(--size);
+      height: var(--size);
+      display: inline-block;
+      color: #F5F5F5;
     }
+    .gl-spinner.sm { --size: 24px; }
+    .gl-spinner.md { --size: 40px; }
+    .gl-spinner.lg { --size: 64px; }
+    .gl-spinner.xl { --size: 96px; }
+    .gl-spinner.on-light { color: #070707; }
 
-    .spinner {
-      width: 96px;
-      height: 96px;
-    }
-
-    .spinner svg {
+    .gl-spinner svg {
       width: 100%;
       height: 100%;
+      overflow: visible;
     }
 
-    /* Dark background */
-    .dark {
-      background: #0f172a;
-      color: #38bdf8;
-      padding: 2rem;
-      border-radius: 16px;
+    .wing-left {
+      transform-origin: 48.88px 45.965px;
+      animation: spinLeft 1.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+    .wing-right {
+      transform-origin: 48.88px 45.965px;
+      animation: spinRight 1.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+    .diamond {
+      transform-origin: 48.88px 45.965px;
+      animation: diamondPulse 1.8s ease-in-out infinite;
+      filter: drop-shadow(0 0 3px rgba(17, 15, 255, 0.5));
     }
 
-    /* Light background */
-    .light {
-      background: #f8fafc;
-      color: #0f172a;
-      padding: 2rem;
-      border-radius: 16px;
+    @keyframes spinLeft {
+      0%   { transform: rotate(0deg) scale(1); }
+      18%  { transform: rotate(0deg) scale(1); }
+      50%  { transform: rotate(180deg) scale(0.78); }
+      82%  { transform: rotate(360deg) scale(1); }
+      100% { transform: rotate(360deg) scale(1); }
+    }
+    @keyframes spinRight {
+      0%   { transform: rotate(0deg) scale(1); }
+      18%  { transform: rotate(0deg) scale(1); }
+      50%  { transform: rotate(-180deg) scale(0.78); }
+      82%  { transform: rotate(-360deg) scale(1); }
+      100% { transform: rotate(-360deg) scale(1); }
+    }
+    @keyframes diamondPulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50%      { transform: scale(1.1); opacity: 0.92; }
     }
   </style>
 </head>
 <body>
   <h1>GenLayer Spinner</h1>
 
-  <div class="demo-grid">
-    <!-- Dark -->
-    <div class="demo-box">
-      <div class="spinner dark">
-        <!-- SVG -->
-        <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" style="overflow: visible;">
-          <style>
-            .system{transform-origin:32px 32px;transform-box:view-box;animation:systemSpin 3.5s linear infinite}
-            .left-wing{transform-origin:32px 32px;transform-box:view-box;animation:leftSeparate 3.5s cubic-bezier(.4,0,.2,1) infinite}
-            .right-wing{transform-origin:32px 32px;transform-box:view-box;animation:rightSeparate 3.5s cubic-bezier(.4,0,.2,1) infinite}
-            .core{transform-origin:32px 41px;transform-box:view-box;animation:coreSpin 3.5s linear infinite}
-            @keyframes systemSpin{0%,25%{transform:rotate(0deg)}55%{transform:rotate(360deg)}100%{transform:rotate(360deg)}}
-            @keyframes leftSeparate{0%,12%{transform:translate(0,0) rotate(0deg)}25%,55%{transform:translate(-10px,-1px) rotate(-8deg)}70%,100%{transform:translate(0,0) rotate(0deg)}}
-            @keyframes rightSeparate{0%,12%{transform:translate(0,0) rotate(0deg)}25%,55%{transform:translate(10px,-1px) rotate(8deg)}70%,100%{transform:translate(0,0) rotate(0deg)}}
-            @keyframes coreSpin{0%,25%{transform:rotate(0deg)}55%{transform:rotate(-360deg)}100%{transform:rotate(-360deg)}}
-            @media (prefers-reduced-motion:reduce){.system,.left-wing,.right-wing,.core{animation:none}}
-          </style>
-          <g class="system">
-            <g class="left-wing"><path d="M32 7 L32 28 L25 41 L9 49 L32 7 Z" fill="currentColor"/></g>
-            <g class="right-wing"><path d="M32 7 L55 49 L39 41 L32 28 L32 7 Z" fill="currentColor"/></g>
-            <g class="core"><path d="M32 33 L38 43 L32 48 L26 43 L32 33 Z" fill="currentColor"/></g>
+  <div class="row">
+    <div class="item">
+      <div class="gl-spinner lg" aria-label="Loading">
+        <svg viewBox="0 0 97.76 91.93">
+          <g class="wing-left">
+            <polygon fill="currentColor" points="44.26 32.35 27.72 67.12 43.29 74.9 0 91.93 44.26 0 44.26 32.35"/>
+          </g>
+          <g class="wing-right">
+            <polygon fill="currentColor" points="53.5 32.35 70.04 67.12 54.47 74.9 97.76 91.93 53.5 0 53.5 32.35"/>
+          </g>
+          <g class="diamond">
+            <polygon fill="currentColor" points="48.64 43.78 58.33 62.94 48.64 67.69 39.47 62.92 48.64 43.78"/>
           </g>
         </svg>
       </div>
-      <p>Dark background</p>
+      <span class="label">Dark background</span>
     </div>
 
-    <!-- Light -->
-    <div class="demo-box">
-      <div class="spinner light">
-        <!-- SVG -->
-        <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" style="overflow: visible;">
-          <style>
-            .system{transform-origin:32px 32px;transform-box:view-box;animation:systemSpin 3.5s linear infinite}
-            .left-wing{transform-origin:32px 32px;transform-box:view-box;animation:leftSeparate 3.5s cubic-bezier(.4,0,.2,1) infinite}
-            .right-wing{transform-origin:32px 32px;transform-box:view-box;animation:rightSeparate 3.5s cubic-bezier(.4,0,.2,1) infinite}
-            .core{transform-origin:32px 41px;transform-box:view-box;animation:coreSpin 3.5s linear infinite}
-            @keyframes systemSpin{0%,25%{transform:rotate(0deg)}55%{transform:rotate(360deg)}100%{transform:rotate(360deg)}}
-            @keyframes leftSeparate{0%,12%{transform:translate(0,0) rotate(0deg)}25%,55%{transform:translate(-10px,-1px) rotate(-8deg)}70%,100%{transform:translate(0,0) rotate(0deg)}}
-            @keyframes rightSeparate{0%,12%{transform:translate(0,0) rotate(0deg)}25%,55%{transform:translate(10px,-1px) rotate(8deg)}70%,100%{transform:translate(0,0) rotate(0deg)}}
-            @keyframes coreSpin{0%,25%{transform:rotate(0deg)}55%{transform:rotate(-360deg)}100%{transform:rotate(-360deg)}}
-            @media (prefers-reduced-motion:reduce){.system,.left-wing,.right-wing,.core{animation:none}}
-          </style>
-          <g class="system">
-            <g class="left-wing"><path d="M32 7 L32 28 L25 41 L9 49 L32 7 Z" fill="currentColor"/></g>
-            <g class="right-wing"><path d="M32 7 L55 49 L39 41 L32 28 L32 7 Z" fill="currentColor"/></g>
-            <g class="core"><path d="M32 33 L38 43 L32 48 L26 43 L32 33 Z" fill="currentColor"/></g>
+    <div class="item light-panel">
+      <div class="gl-spinner lg on-light" aria-label="Loading">
+        <svg viewBox="0 0 97.76 91.93">
+          <g class="wing-left">
+            <polygon fill="currentColor" points="44.26 32.35 27.72 67.12 43.29 74.9 0 91.93 44.26 0 44.26 32.35"/>
+          </g>
+          <g class="wing-right">
+            <polygon fill="currentColor" points="53.5 32.35 70.04 67.12 54.47 74.9 97.76 91.93 53.5 0 53.5 32.35"/>
+          </g>
+          <g class="diamond">
+            <polygon fill="currentColor" points="48.64 43.78 58.33 62.94 48.64 67.69 39.47 62.92 48.64 43.78"/>
           </g>
         </svg>
       </div>
-      <p>Light background</p>
+      <span class="label">Light background</span>
     </div>
   </div>
+
+  <div class="row">
+    <div class="item">
+      <div class="gl-spinner sm">
+        <svg viewBox="0 0 97.76 91.93">
+          <g class="wing-left"><polygon fill="currentColor" points="44.26 32.35 27.72 67.12 43.29 74.9 0 91.93 44.26 0 44.26 32.35"/></g>
+          <g class="wing-right"><polygon fill="currentColor" points="53.5 32.35 70.04 67.12 54.47 74.9 97.76 91.93 53.5 0 53.5 32.35"/></g>
+          <g class="diamond"><polygon fill="currentColor" points="48.64 43.78 58.33 62.94 48.64 67.69 39.47 62.92 48.64 43.78"/></g>
+        </svg>
+      </div>
+      <span class="label">24px</span>
+    </div>
+    <div class="item">
+      <div class="gl-spinner md">
+        <svg viewBox="0 0 97.76 91.93">
+          <g class="wing-left"><polygon fill="currentColor" points="44.26 32.35 27.72 67.12 43.29 74.9 0 91.93 44.26 0 44.26 32.35"/></g>
+          <g class="wing-right"><polygon fill="currentColor" points="53.5 32.35 70.04 67.12 54.47 74.9 97.76 91.93 53.5 0 53.5 32.35"/></g>
+          <g class="diamond"><polygon fill="currentColor" points="48.64 43.78 58.33 62.94 48.64 67.69 39.47 62.92 48.64 43.78"/></g>
+        </svg>
+      </div>
+      <span class="label">40px</span>
+    </div>
+    <div class="item">
+      <div class="gl-spinner lg">
+        <svg viewBox="0 0 97.76 91.93">
+          <g class="wing-left"><polygon fill="currentColor" points="44.26 32.35 27.72 67.12 43.29 74.9 0 91.93 44.26 0 44.26 32.35"/></g>
+          <g class="wing-right"><polygon fill="currentColor" points="53.5 32.35 70.04 67.12 54.47 74.9 97.76 91.93 53.5 0 53.5 32.35"/></g>
+          <g class="diamond"><polygon fill="currentColor" points="48.64 43.78 58.33 62.94 48.64 67.69 39.47 62.92 48.64 43.78"/></g>
+        </svg>
+      </div>
+      <span class="label">64px</span>
+    </div>
+    <div class="item">
+      <div class="gl-spinner xl">
+        <svg viewBox="0 0 97.76 91.93">
+          <g class="wing-left"><polygon fill="currentColor" points="44.26 32.35 27.72 67.12 43.29 74.9 0 91.93 44.26 0 44.26 32.35"/></g>
+          <g class="wing-right"><polygon fill="currentColor" points="53.5 32.35 70.04 67.12 54.47 74.9 97.76 91.93 53.5 0 53.5 32.35"/></g>
+          <g class="diamond"><polygon fill="currentColor" points="48.64 43.78 58.33 62.94 48.64 67.69 39.47 62.92 48.64 43.78"/></g>
+        </svg>
+      </div>
+      <span class="label">96px</span>
+    </div>
+  </div>
+
+  <footer>
+    Pure SVG + CSS · Infinite loop · Light & dark ready · Readable at 24px<br>
+    Built with the official GenLayer mark · Kinetic Cobalt glow
+  </footer>
 </body>
 </html>
